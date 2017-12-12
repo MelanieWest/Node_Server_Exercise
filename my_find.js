@@ -21,6 +21,8 @@ Promise.config({
 
 exports.findServer=function(serverArray){
 
+    validUrl = [];      // because valid servers will be returned at different times, collect them
+
     var chosenOne="no available servers found";     //placeholder for url of lowest priority available server
 
     var minPriority = 100;      //start with a high priority number for comparison
@@ -34,11 +36,9 @@ exports.findServer=function(serverArray){
 
         var options = {
             method: 'GET',
-            uri: serverArray.url,           //extract the url of the next server in the array of servers
+            uri: url,           //extract the url of the next server in the array of servers
             resolveWithFullResponse: true
         };
-
-        var priority = serverArray.priority;        //extract the priority level of the current server being called
      
         return rp(options).spread(function(response,body) {        //
             return Promise.delay(5000, JSON.parse(body));
@@ -51,19 +51,20 @@ exports.findServer=function(serverArray){
                 chosenOne = response.url;
             }
         } 
+        console.log('chosen one: '+chosenOne.green);
     }).catch(function(error){
-        console.log('error: '+error.message);        
+        console.log('error: '+error.message.red);        
     });
 
 
-    // serverArray.forEach(function(){
+    // serverArray.forEach(function(url){
     //     var options = {
     //         method: 'GET',
-    //         uri: serverArray.url,           //extract the url of the next server in the array of servers
+    //         uri: url,           //extract the url of the next server in the array of servers
     //         resolveWithFullResponse: true
     //     };
 
-    //     var priority = serverArray.priority;        //extract the priority level of the current server being called
+    //     var priority = priority;        //extract the priority level of the current server being called
 
     //     rp(options)
     //     .then(function (response) {
