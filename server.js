@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-//var findServer = require('bt-find-server');
 
 var app = express();
 

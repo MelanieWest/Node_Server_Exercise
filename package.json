@@ -1,8 +1,8 @@
 {
   "name": "find_server",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
-  "main": "server.js",
+  "main": "my_find.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/MelanieWest/Node_Server_Exercise#readme",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "colors": "^1.1.2",
     "express": "^4.16.2",
-    "util": "^0.10.3"
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
   }
 }
