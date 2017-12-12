@@ -1,5 +1,5 @@
 {
-  "name": "node_server",
+  "name": "find_server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/MelanieWest/Node_Server_Exercise.git"
   },
-  "author": "",
+  "author": "melanie west <dhmofan@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MelanieWest/Node_Server_Exercise/issues"
@@ -19,7 +19,6 @@
   "homepage": "https://github.com/MelanieWest/Node_Server_Exercise#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "bt-find-server": "0.0.11",
     "express": "^4.16.2",
     "util": "^0.10.3"
   }
