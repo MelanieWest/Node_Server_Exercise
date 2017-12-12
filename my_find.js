@@ -31,7 +31,16 @@ exports.findServer=function(serverArray){
     //iterate through the array of server objects using Promise.map
 
     Promise.map(serverArray, function(url) {
-        return rp.getAsync(url).spread(function(response,body) {        //
+
+        var options = {
+            method: 'GET',
+            uri: serverArray.url,           //extract the url of the next server in the array of servers
+            resolveWithFullResponse: true
+        };
+
+        var priority = serverArray.priority;        //extract the priority level of the current server being called
+     
+        return rp(options).spread(function(response,body) {        //
             return Promise.delay(5000, JSON.parse(body));
         });
     }).then(function(response){
