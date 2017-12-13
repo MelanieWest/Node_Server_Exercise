@@ -27,31 +27,38 @@ exports.findServer=function(serverArray){
 
     var minPriority = 100;      //start with a high priority number for comparison
 
-    //I chose to use Bluebird since it supports promises, timers, and concurrency in a fashion that
-    //was understandable to me.  
+    //I chose to use Bluebird since it supports promises, timers, and concurrency
 
     //iterate through the array of server objects using Promise.map
 
-    Promise.map(serverArray, function(url) {
+    Promise.map(serverArray, function(serverArray) {
+
+    //set up options for request-promise get request
 
         var options = {
             method: 'GET',
-            uri: url,           //extract the url of the next server in the array of servers
+            uri: serverArray.url,           //extract the url of the next server in the array of servers
             resolveWithFullResponse: true
         };
      
-        return rp(options).spread(function(response,body) {        //
+        var priority = serverArray.priority;
+
+        return rp(options).then(function(response,body) {        //
             return Promise.delay(5000, JSON.parse(body));
-        });
+        })
     }).then(function(response){
         if(response.statusCode>=200 && response.statusCode<=299){
-            console.log("I found a server!".blue);
+
+            //console.log("I found a server!".blue);
+
             validUrl.push(response.url);
             if(priority < minPriority){
                 chosenOne = response.url;
             }
         } 
-        console.log('chosen one: '+chosenOne.green);
+
+        //console.log('chosen one: '+chosenOne.green);
+
     }).catch(function(error){
         console.log('error: '+error.message.red);        
     });
