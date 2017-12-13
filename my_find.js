@@ -38,12 +38,12 @@ exports.findServer=function(serverArray){
         var options = {
             method: 'GET',
             uri: server.url,           //extract the url of the next server in the array of servers
-            resolveWithFullResponse: true
+            resolveWithFullResponse: true       //body, status and/or error code
         };
      
-        var priority = server.priority;
+        var priority = server.priority;     //identify the priority number of the server
 
-        return rp(options).then(function(response,body) {        //
+        return rp(options).then(function(response,body) {        //request server response
             return Promise.delay(5000, JSON.parse(body));
         })
     }).then(function(response){
@@ -57,7 +57,7 @@ exports.findServer=function(serverArray){
             }
         } 
 
-        console.log('chosen one: '+chosenOne.green);
+         console.log('chosen one: '+chosenOne.green);
 
     }).catch(function(error){
         console.log('error: '+error.message.red);        
@@ -66,7 +66,7 @@ exports.findServer=function(serverArray){
 }       //end of export block
 
 app.listen(8000,function(){
-    console.log('server started on port 8000');
+    console.log('server started on port 8000'.blue);
 });
 
 
